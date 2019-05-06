@@ -73,8 +73,10 @@ int main(int argc, char **argv)
     plt::named_plot("q1q2_traj",state[16],  state[20] ); // pos of joints 5 and joint 6
 //    plt::named_plot("q1&q2", x, z);
     // Set x-axis to interval [0,1000000]
-    plt::xlim(0, 1);
-    plt::ylim(0, 1);
+    plt::xlim(0, 2);
+    plt::ylim(0, 2);
+    plt::xlabel("q1");
+    plt::ylabel("q2");
     // Add graph title
     plt::title("2_dof_waypt");
     // Enable legend.

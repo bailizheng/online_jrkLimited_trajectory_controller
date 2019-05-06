@@ -34,28 +34,32 @@ traj.points.push_back(pt);
 pt.positions = { 0.20, 0.60, 0.20, 0.60, 0.20, 0.60};
 pt.velocities = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 pt.accelerations = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+pt.time_from_start = ros::Duration( 0.5e9 );
+traj.points.push_back(pt);
+
+
+
+pt.positions = {0.60, 0.10, 0.60, 0.10, 0.60, 0.10};
+pt.velocities = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+pt.accelerations = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 pt.time_from_start = ros::Duration( 0.6e9 );
 traj.points.push_back(pt);
 
 
-pt.positions = {0.40, 0.60,0.40, 0.60, 0.40, 0.60};
+pt.positions = {01.90, 0.10, 01.90, 0.10, 01.90, 0.10};
 pt.velocities = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 pt.accelerations = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-pt.time_from_start = ros::Duration( 0.8e9 );
+pt.time_from_start = ros::Duration( 0.9e9 );
 traj.points.push_back(pt);
 
 
-pt.positions = {0.60, 0.40,0.60, 0.40, 0.60, 0.40};
+
+pt.positions = {0.10, 01.90,0.10, 01.90, 0.10, 01.90};
 pt.velocities = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 pt.accelerations = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-pt.time_from_start = ros::Duration( 1.e9 );
+pt.time_from_start = ros::Duration( 0.95e9 );
 traj.points.push_back(pt);
 
-pt.positions = {0.40, 0.20,0.40, 0.20, 0.40, 0.20};
-pt.velocities = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-pt.accelerations = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-pt.time_from_start = ros::Duration( 1.2e9 );
-traj.points.push_back(pt);
 
 
 

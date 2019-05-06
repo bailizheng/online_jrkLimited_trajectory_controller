@@ -10,6 +10,8 @@
 #include "std_msgs/Float64MultiArray.h"
 //#include "normal_toppra_traj_instant_3.h"
 #include "test_trajectory_1.h"
+//#include "test_trajectory_max_jrk.h"
+
 
 
 int main(int argc, char **argv)
