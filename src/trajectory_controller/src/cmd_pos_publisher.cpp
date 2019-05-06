@@ -1,3 +1,11 @@
+/**
+\file   cmd_pos_publisher.cpp
+\brief  to publish waypoints waypoints from a trajectory file.
+ *
+\author  Mahmoud Ali
+\date    3/5/2019
+*/
+
 #include "ros/ros.h"
 #include "std_msgs/Float64MultiArray.h"
 //#include "normal_toppra_traj_instant_3.h"

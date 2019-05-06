@@ -149,7 +149,7 @@ include_directories(
      include/six_dof_pos_controller_capi.cpp
      include/rtw_solver.h
      include/multiword_types.h
-     include/six_dof_pos_controller.zip
+#     include/six_dof_pos_controller.zip
      include/six_dof_pos_controller_data.cpp
      include/rtGetInf.cpp
      include/sysran_types.h
@@ -168,10 +168,10 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
- add_executable(controller_node src/controller_node.cpp)
+# add_executable(controller_node src/controller_node.cpp)
+# add_executable(controller_syn_node src/controller_syn_node.cpp)
+
  add_executable(cmd_pos_publisher src/cmd_pos_publisher.cpp)
- add_executable(controller_syn_node src/controller_syn_node.cpp)
- add_executable(try_node src/try_node.cpp)
  add_executable(controller_approaching_last_waypoint src/controller_approaching_last_waypoint.cpp)
  add_executable(controller_approaching_each_waypoint src/controller_approaching_each_waypoint.cpp)
 
@@ -186,12 +186,11 @@ include_directories(
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Specify libraries to link a library or executable target against
- target_link_libraries(controller_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
- target_link_libraries(controller_syn_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
+### Specify libraries to link a library or executable target against
+# target_link_libraries(controller_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
+# target_link_libraries(controller_syn_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
 
  target_link_libraries(cmd_pos_publisher   ${catkin_LIBRARIES} )
- target_link_libraries(try_node  ${PROJECT_NAME} ${catkin_LIBRARIES} )
  target_link_libraries(controller_approaching_last_waypoint  ${PROJECT_NAME} ${catkin_LIBRARIES} )
  target_link_libraries(controller_approaching_each_waypoint  ${PROJECT_NAME} ${catkin_LIBRARIES} )
 
