@@ -7,7 +7,8 @@
  *  the message that contains the state of all the joint is Float64MultiArray msg, each joint has 4 states,
  *  starting from joint_0 with index 0-3 then joint_1 with index 5-7 .. and so on
  *  the trajectory will keep track of th elast point sent through the cmd_pos topic,
- *  so if a new waypoint comes before reaching the current waypoint, the controller will neglect the current waypoint and approach the last one.
+ *  so if a new waypoint comes before reaching the current waypoint, 
+ *  the controller will neglect the current waypoint and approach the last one.
  *  limits:
  *  sm: position limit, vm:velocity limit, am: acceleration limit, jm:jerk limit.
  *  this controller based on simulink model which is attached in th e include files.
