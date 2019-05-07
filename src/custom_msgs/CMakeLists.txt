@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(trajectory_controller)
+project(custom_msgs)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
  add_compile_options(-std=c++11)
@@ -10,7 +10,7 @@ project(trajectory_controller)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
-  custom_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,11 +47,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+ add_message_files(
+   FILES
+   state_msg.msg
 #   Message2.msg
-# )
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,10 +68,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -104,8 +104,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES six_dof_pos_controller
-  CATKIN_DEPENDS roscpp std_msgs
+#  LIBRARIES custom_msgs
+  CATKIN_DEPENDS roscpp std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -116,50 +116,14 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
- include
+# include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
- add_library(${PROJECT_NAME}
-     include/six_dof_pos_controller.h
-     include/rtw_capi.h
-     include/six_dof_pos_controller.cpp
-     include/rtw_extmode.h
-     include/rtw_modelmap_logging.h
-     include/simstruc_types.h
-     include/builtin_typeid_types.h
-     include/tmwtypes.h
-     include/rtGetInf.h
-     include/rtmodel.h
-     include/sl_types_def.h
-     include/rt_nonfinite.cpp
-     include/rtGetNaN.h
-     include/rtGetNaN.cpp
-     include/six_dof_pos_controller_capi.h
-#     include/rt_main.c
-     include/six_dof_pos_controller_capi_host.h
-     include/ext_work.h
-     include/rt_logging.c
-     include/rt_mxclassid.h
-     include/rtw_modelmap.h
-     include/sl_sample_time_defs.h
-     include/six_dof_pos_controller_types.h
-     include/rtwtypes.h
-     include/six_dof_pos_controller_private.h
-     include/six_dof_pos_controller_capi.cpp
-     include/rtw_solver.h
-     include/multiword_types.h
-#     include/six_dof_pos_controller.zip
-     include/six_dof_pos_controller_data.cpp
-     include/rtGetInf.cpp
-     include/sysran_types.h
-     include/rt_nonfinite.h
-     include/rtw_continuous.h
-     include/rt_logging.h
-     include/rtw_matlogging.h
-
-     )
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/custom_msgs.cpp
+# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -169,14 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(controller_node src/controller_node.cpp)
-# add_executable(controller_syn_node src/controller_syn_node.cpp)
-
- add_executable(cmd_pos_publisher src/cmd_pos_publisher.cpp)
- add_executable(controller_approaching_last_waypoint src/controller_approaching_last_waypoint.cpp)
- add_executable(controller_approaching_each_waypoint src/controller_approaching_each_waypoint.cpp)
- add_executable(test_plot_juggler src/test_plot_juggler.cpp)
-
+# add_executable(${PROJECT_NAME}_node src/custom_msgs_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -188,14 +145,10 @@ include_directories(
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-### Specify libraries to link a library or executable target against
-# target_link_libraries(controller_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
-# target_link_libraries(controller_syn_node ${PROJECT_NAME}  ${catkin_LIBRARIES} )
-
- target_link_libraries(cmd_pos_publisher   ${catkin_LIBRARIES} )
- target_link_libraries(controller_approaching_last_waypoint  ${PROJECT_NAME} ${catkin_LIBRARIES} )
- target_link_libraries(controller_approaching_each_waypoint  ${PROJECT_NAME} ${catkin_LIBRARIES} )
- target_link_libraries(test_plot_juggler  ${PROJECT_NAME} ${catkin_LIBRARIES} )
+## Specify libraries to link a library or executable target against
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -237,7 +190,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_six_dof_pos_controller.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_custom_msgs.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

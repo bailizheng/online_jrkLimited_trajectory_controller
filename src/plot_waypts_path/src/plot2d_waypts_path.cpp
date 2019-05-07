@@ -69,12 +69,12 @@ int main(int argc, char **argv)
 
     }
 
-     plt::named_plot("waypoints",cmd_pos[4], cmd_pos[5], "*" ); // commanded position for joint 5, and 6
-    plt::named_plot("q1q2_traj",state[16],  state[20] ); // pos of joints 5 and joint 6
-//    plt::named_plot("q1&q2", x, z);
-    // Set x-axis to interval [0,1000000]
-    plt::xlim(0, 2);
-    plt::ylim(0, 2);
+    int q1=0, q2=1; //plot two joint wrt each other in 2d joint space
+    plt::named_plot("waypoints",cmd_pos[q1], cmd_pos[q2], "*" ); // commanded position for joint q1, and q2
+    plt::named_plot("path_joint_space",state[4*q1],  state[4*q2] ); // pos of joints q1 and joint q2
+
+    plt::xlim(0, 1);
+    plt::ylim(0, 1);
     plt::xlabel("q1");
     plt::ylabel("q2");
     // Add graph title

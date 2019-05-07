@@ -23,7 +23,7 @@
 #include "ext_work.h"
 #include "std_msgs/Float64MultiArray.h"
 
-const double sm=180,  vm=130,  am=250, jm=1000, frq=125;
+const double sm=180,  vm=130,  am=250, jm=500, frq=125;
 
 P_six_dof_pos_controller_T six_dof_pos_controller_P;
 ExtU_six_dof_pos_controller_T six_dof_pos_controller_U;

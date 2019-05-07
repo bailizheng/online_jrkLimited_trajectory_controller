@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   trajectory_msgs
   joint_trajectory_controller
+  custom_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -143,11 +144,11 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHO
 
 
 add_executable(plot2d_waypts_path         src/plot2d_waypts_path.cpp)
-#add_executable(last_vs_each_waypts         src/last_vs_each_waypts.cpp)
+add_executable(plot_trajectory         src/plot_trajectory.cpp)
 
 
 target_link_libraries(plot2d_waypts_path   yaml-cpp ${PYTHON_INCLUDE_DIRS}  ${catkin_LIBRARIES})
-#target_link_libraries(last_vs_each_waypts   yaml-cpp ${PYTHON_INCLUDE_DIRS}  ${catkin_LIBRARIES})
+target_link_libraries(plot_trajectory   yaml-cpp ${PYTHON_INCLUDE_DIRS}  ${catkin_LIBRARIES})
 
 #add_dependencies(test_new_defined_funcs  yaml-cpp)
 
