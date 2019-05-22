@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(plot_waypts_path)
+project(velocity_jogging)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
  add_compile_options(-std=c++11)
@@ -9,17 +9,11 @@ project(plot_waypts_path)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  trajectory_msgs
-  joint_trajectory_controller
-  custom_msgs
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
- find_package(Boost REQUIRED COMPONENTS system)
- find_package(yaml-cpp REQUIRED )
- find_package(PythonLibs 2.7 REQUIRED)
- include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
-
+# find_package(Boost REQUIRED COMPONENTS system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -53,11 +47,10 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
 # add_message_files(
- #  FILES
-#   sampled_trajectory.msg
-#   trajectory_state.msg
+#   FILES
+#   Message1.msg
 #   Message2.msg
- #)
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -74,10 +67,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
- #generate_messages(
-   #DEPENDENCIES
-  #    std_msgs  # Or other packages containing msgs
- #)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -109,8 +102,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  CATKIN_DEPENDS roscpp
-  trajectory_msgs
+#  INCLUDE_DIRS include
+#  LIBRARIES velocity_jogging
+  CATKIN_DEPENDS roscpp std_msgs
+#  DEPENDS system_lib
 )
 
 ###########
@@ -119,18 +114,51 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(${catkin_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
-include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
-#add_library(${PROJECT_NAME}
-#                            include/s_curve_functions.cpp
-#                            scripts/traj_test_instant.h
-#                            scripts/normal_toppra_traj_instant.h
-#                            )
+include_directories(
+ include
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/traj_controller.cpp
-# )
+ add_library(${PROJECT_NAME}
+     include/six_dof_vel_controller.h
+     include/rtw_capi.h
+#     include/six_dof_vel_controller.zip
+     include/rtw_extmode.h
+     include/rtw_modelmap_logging.h
+     include/simstruc_types.h
+     include/builtin_typeid_types.h
+     include/six_dof_vel_controller_private.h
+     include/tmwtypes.h
+     include/rtGetInf.h
+     include/rtmodel.h
+     include/sl_types_def.h
+     include/rt_nonfinite.cpp
+     include/rtGetNaN.h
+     include/rtGetNaN.cpp
+#     include/defines.txt
+     include/six_dof_vel_controller_types.h
+#     include/rt_main.c
+     include/six_dof_vel_controller_data.cpp
+     include/ext_work.h
+     include/six_dof_vel_controller_capi.h
+     include/six_dof_vel_controller_capi_host.h
+     include/rt_logging.c
+     include/rt_mxclassid.h
+     include/rtw_modelmap.h
+     include/sl_sample_time_defs.h
+     include/rtwtypes.h
+     include/rtw_solver.h
+     include/multiword_types.h
+     include/six_dof_vel_controller.cpp
+     include/rtGetInf.cpp
+     include/sysran_types.h
+     include/six_dof_vel_controller_capi.cpp
+     include/rt_nonfinite.h
+     include/rtw_continuous.h
+     include/rt_logging.h
+     include/rtw_matlogging.h
+ )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -140,26 +168,15 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHO
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/traj_controller_node.cpp)
-
-
-add_executable(plot2d_waypts_path         src/plot2d_waypts_path.cpp)
-add_executable(plot_trajectory         src/plot_trajectory.cpp)
-
-
-target_link_libraries(plot2d_waypts_path   yaml-cpp ${PYTHON_INCLUDE_DIRS}  ${catkin_LIBRARIES})
-target_link_libraries(plot_trajectory   yaml-cpp ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS}  ${catkin_LIBRARIES})
-
-#add_dependencies(test_new_defined_funcs  yaml-cpp)
-
+# add_executable(${PROJECT_NAME}_node src/velocity_jogging_node.cpp)
+add_executable(velocity_jogging_node src/velocity_jogging_node.cpp)
+add_executable(cmd_vel_publisher src/cmd_vel_publisher.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -169,6 +186,10 @@ target_link_libraries(plot_trajectory   yaml-cpp ${Boost_INCLUDE_DIRS} ${PYTHON_
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+target_link_libraries(velocity_jogging_node  ${PROJECT_NAME} ${catkin_LIBRARIES} )
+target_link_libraries(cmd_vel_publisher      ${PROJECT_NAME} ${catkin_LIBRARIES} )
+
 
 #############
 ## Install ##
@@ -210,7 +231,7 @@ target_link_libraries(plot_trajectory   yaml-cpp ${Boost_INCLUDE_DIRS} ${PYTHON_
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_traj_controller.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_velocity_jogging.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
