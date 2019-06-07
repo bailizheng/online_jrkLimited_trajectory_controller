@@ -16,6 +16,18 @@
 //#include "s_curve_functions.cpp"
 const double sm=180,  vm=130,  am=250, jm=1000,  cnt= 1e-2, frq=125;
 
+
+bool check_vel_limit(std_msgs::Float64MultiArray & vel_msg){
+    for (int jt=0; jt< 6; jt++) {
+        if(vel_msg.data[jt]>sm )
+            vel_msg.data[jt] = sm;
+        if(vel_msg.data[jt]< -sm )
+            vel_msg.data[jt] = -sm;
+
+    }
+}
+
+
 P_six_dof_vel_controller_T six_dof_vel_controller_P;
 ExtU_six_dof_vel_controller_T six_dof_vel_controller_U;
 ExtY_six_dof_vel_controller_T six_dof_vel_controller_Y;
@@ -28,6 +40,7 @@ bool cmd_vel_received = false;
 // command velitions call_back
 void cmd_call_back(std_msgs::Float64MultiArray msg){
     cmd_vel_received = true;
+     check_vel_limit(msg);
     for(int i=0; i<6; i++){
 //        ROS_INFO_STREAM("cmd_vel_received: msg.data[" << i << "] =  " << msg.data[i]);
         last_cmd_vel[i] = msg.data[i];
@@ -145,3 +158,8 @@ int main(int argc, char **argv)
    six_dof_vel_controller_terminate();
   return 0;
 }
+// okay first things first:
+// 1. reading files for cpp for robotics practical 
+// 2. Gijs, update on both ways, try you own way.
+// see what do you want if you join, lastest presentation: probably I want to join them as well in room D upstairs lets see what is gooinf on 
+// ya rab help me to be accepted in the phd posoion on france nice on event based camera. lfnnhnj omdjkk hfuke kfislmfji 
