@@ -158,8 +158,3 @@ int main(int argc, char **argv)
    six_dof_vel_controller_terminate();
   return 0;
 }
-// okay first things first:
-// 1. reading files for cpp for robotics practical 
-// 2. Gijs, update on both ways, try you own way.
-// see what do you want if you join, lastest presentation: probably I want to join them as well in room D upstairs lets see what is gooinf on 
-// ya rab help me to be accepted in the phd posoion on france nice on event based camera. lfnnhnj omdjkk hfuke kfislmfji 

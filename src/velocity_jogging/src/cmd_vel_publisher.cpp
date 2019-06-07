@@ -9,10 +9,10 @@ int main(int argc, char **argv)
 
     // message for sending waypoints one by one
     std_msgs::Float64MultiArray msg;
-//    std::vector< std::vector<double> > vel_pt_jt={{-02,   35,  -25,  5,  30,    20},
-//                                                  {-15,  -35,   -35,  0,  15,   -5},
-//                                                  {-05,   00,   -25, -30,  35,   30},
-//                                                  {  5,   00,   15, -20,  -25,   10}}; //different combinations
+    std::vector< std::vector<double> > vel_pt_jt={{-02,   35,  -25,  5,  30,    20},
+                                                  {-15,  -35,   -35,  0,  15,   -5},
+                                                  {-05,   00,   -25, -30,  35,   30},
+                                                  {  5,   00,   15, -20,  -25,   10}}; //different combinations
 
 
 //    std::vector< std::vector<double> > vel_pt_jt={{-02,  130,  130,  5,  30,    20},
@@ -20,10 +20,10 @@ int main(int argc, char **argv)
 //                                                  {-05,   130,   130, 0,  35,   30},
 //                                                  {  5,   00,   -130, -20,  -25,   10}}; //different combinations
 
-    std::vector< std::vector<double> > vel_pt_jt={{-02,  130,  130,  5,  30,    20},
-                                                  {-15,  -130,   130,  0,  15,   -5},
-                                                  {-05,   130,   -130, 0,  35,   30},
-                                                  {  5,   -130,   130, -20,  -25,   10}}; //different combinations
+//    std::vector< std::vector<double> > vel_pt_jt={{-02,  130,  130,  5,  30,    20},
+//                                                  {-15,  -130,   130,  0,  15,   -5},
+//                                                  {-05,   130,   -130, 0,  35,   30},
+//                                                  {  5,   -130,   130, -20,  -25,   10}}; //different combinations
 
 
 
